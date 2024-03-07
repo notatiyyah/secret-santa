@@ -1,9 +1,9 @@
 
-const InputNames = ({addName}) => {
+const InputNames = ({addPerson}) => {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-          addName(event.target.value);
+          addPerson(event.target.value);
             event.target.value = "";
         }
       }
