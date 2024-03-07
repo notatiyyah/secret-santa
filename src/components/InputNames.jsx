@@ -1,5 +1,5 @@
 
-const InputNames = ({names, addName}) => {
+const InputNames = ({addName}) => {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {

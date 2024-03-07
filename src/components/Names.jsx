@@ -9,17 +9,20 @@ const Names = () => {
         setNames(oldNames => [name, ...oldNames]);
     }
 
-    const removeName = (name) => {
-        setNames(oldNames => oldNames.filter(n => n !== name));
+    const removeName = (index) => {
+        setNames(oldNames => oldNames.filter((_, i) => i !== index));
     }
 
-    const editName = (name, newName) => {
-        setNames(oldNames => oldNames.map(n => n === name ? newName : n));
+    const editName = (index, newName) => {
+        setNames(oldNames => {
+            oldNames[index] = newName;
+            return oldNames;
+        });
     }
 
     return (
         <>
-            <InputNames names={names} addName={addName} />
+            <InputNames addName={addName} />
             <DisplayNames names={names} removeName={removeName} editName={editName} />
         </>
     )

@@ -1,41 +1,48 @@
 import { useState } from "react";
 
-const DisplayName = ({ name : n, index, removeName, editName: updateName }) => {
-    const [isEditing, setIsEditing] = useState(false);
+const DisplayName = ({ index, name : n, removeName : deleteName, editName }) => {
     const [name, setName] = useState(n);
-    const [newName, setNewName] = useState(n);
+    const [isEditing, setIsEditing] = useState(false);
 
-    const editName = () => {
-        updateName(name, newName);
-        setName(newName);
+    const onNameEdit = (e) => {
+        setName(e.target.value);
+    }
+
+    const updateName = () => {
+        editName(index, name);
         setIsEditing(false);
     }
-    
+
+    const removeName = () => {
+        deleteName(index);
+    }
+
+    if(isEditing){
+        return (
+            <li key={index}>
+                <input type="text" value={name} onChange={onNameEdit} />
+                <button onClick={updateName}>save</button>
+            </li>
+        );
+    }
+
     return (
         <li key={index}>
             <p>
-                {/* if isEditing is true, display input, otherwise display the name */}
-                {isEditing ? 
-                <input type="text" value={newName} onChange={(event) => setNewName(event.target.value)} /> :
-                <>{name}&nbsp;</>}
-
-                {/* if isEditing is true, display x button, otherwise display nothing */}
-                {isEditing ? null : <button onClick={() => removeName(name)}>x</button>}
-                
-                {/* if isEditing is true, display save button, otherwise display edit button */}
-                {isEditing ? 
-                <button onClick={editName}>save</button> :
-                <button onClick={() => setIsEditing(true)}>edit</button>}
+                {name}&nbsp;
+                <button onClick={removeName}>x</button>
+                <button onClick={() => setIsEditing(true)}>edit</button>
             </p>
         </li>
     );
 }
 
 const DisplayNames = ({ names, removeName, editName }) => {
+    console.log(names);
     return (
         <ul>
             {names.map((name, index) => {
-                return <DisplayName key={index} name={name} index={index} removeName={removeName} editName={editName} />
+                return <DisplayName key={index+name} index={index} name={name} removeName={removeName} editName={editName} />
             })}
         </ul>
     );
