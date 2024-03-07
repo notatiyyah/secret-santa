@@ -41,7 +41,7 @@ const DisplayPersons = ({ persons, removePerson, editPerson }) => {
     return (
         <ul>
             {persons.map((person, index) => {
-                return <DisplayPerson key={index+person.personName} index={index} person={person} removePerson={removePerson} editPerson={editPerson} />
+                return <DisplayPerson key={person} index={index} person={person} removePerson={removePerson} editPerson={editPerson} />
             })}
         </ul>
     );

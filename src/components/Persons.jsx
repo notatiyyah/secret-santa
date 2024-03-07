@@ -4,7 +4,6 @@ import DisplayPersons from "./DisplayPersons";
 
 const Persons = () => {
     const [persons, setPersons] = useState([]);
-    console.log(persons);
     
     const addPerson = (name) => {
         var personObj = {personName: name, blacklist: []};
